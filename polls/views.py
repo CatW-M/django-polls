@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.views.generic.edit import CreateView
 
 from .models import Choice
 from .models import Question
@@ -30,6 +31,11 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+
+class QuestionCreate(CreateView):
+  model = Question
+  fields = '__all__'
+  success_url = 'polls'
 
 
 def vote(request, question_id):
